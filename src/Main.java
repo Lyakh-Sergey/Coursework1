@@ -1,5 +1,5 @@
 public class Main {
-    public static Employee[] employees = new Employee[10];
+    private static Employee[] employees = new Employee[10];
 
 
     public static void main(String[] args) {
@@ -17,13 +17,12 @@ public class Main {
         printAllEmployee();
         double sum = calculateTotalSumSalary();
         System.out.println("Сумма затрат на ЗП в месяц: " + sum + " руб.коп.");
-        Employee employee1 = findEmployeeWithMinSalary();
-        System.out.println("Сотрудник с минимальной зарплатой в размере " + employee1.getSalary() + " руб.коп. - " + employee1.getFullName());
-        Employee employee = findEmployeeWithMaxSalary();
-        System.out.println("Сотрудник с максимальной зарплатой в размере " + employee.getSalary() + " руб.коп. - " + employee.getFullName());
-        double averageSalary = calculateTotalSumSalary() / employees.length;
-        double roundedAverageSalary = Math.round(averageSalary * 100.0) / 100.0;
-        System.out.println("Средняя зарплата сотрудников состовляет: " + roundedAverageSalary + " руб.коп.");
+        Employee employeeWithMinSalary = findEmployeeWithMinSalary();
+        System.out.println("Сотрудник с минимальной зарплатой в размере " + employeeWithMinSalary.getSalary() + " руб.коп. - " + employeeWithMinSalary.getFullName());
+        Employee employeeWithMaxSalary = findEmployeeWithMaxSalary();
+        System.out.println("Сотрудник с максимальной зарплатой в размере " + employeeWithMaxSalary.getSalary() + " руб.коп. - " + employeeWithMaxSalary.getFullName());
+        double averageSalary = calculateAverageSalary();
+        System.out.println("Средняя зарплата сотрудников состовляет: " + averageSalary + " руб.коп.");
         printFullNameEmployee();
 
     }
@@ -48,7 +47,6 @@ public class Main {
             if (employeeWithMinSalary == null || employee.getSalary() < employeeWithMinSalary.getSalary()) {
                 employeeWithMinSalary = employee;
             }
-
         }
         return employeeWithMinSalary;
     }
@@ -59,9 +57,12 @@ public class Main {
             if (employeeWithMaxSalary == null || employee.getSalary() > employeeWithMaxSalary.getSalary()) {
                 employeeWithMaxSalary = employee;
             }
-
         }
         return employeeWithMaxSalary;
+    }
+
+    public static double calculateAverageSalary() {
+        return Math.round((calculateTotalSumSalary() / employees.length) * 100.0) / 100.0;
     }
 
     public static void printFullNameEmployee() {
