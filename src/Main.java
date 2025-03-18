@@ -112,8 +112,7 @@ public class Main {
     private static Employee findEmployeeWithMinSalaryInDepartment(int departmentId) {
         Employee employeeWithMinSalary = null;
         for (Employee employee : employees) {
-            if (departmentId == employee.getDepartment()) {
-                if (employeeWithMinSalary == null || employee.getSalary() < employeeWithMinSalary.getSalary()) {
+            if (departmentId == employee.getDepartment() && (employeeWithMinSalary == null || employee.getSalary() < employeeWithMinSalary.getSalary())) {
                     employeeWithMinSalary = employee;
                 }
             }
