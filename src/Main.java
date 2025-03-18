@@ -113,8 +113,7 @@ public class Main {
         Employee employeeWithMinSalary = null;
         for (Employee employee : employees) {
             if (departmentId == employee.getDepartment() && (employeeWithMinSalary == null || employee.getSalary() < employeeWithMinSalary.getSalary())) {
-                    employeeWithMinSalary = employee;
-                }
+                employeeWithMinSalary = employee;
             }
         }
         return employeeWithMinSalary;
@@ -122,13 +121,10 @@ public class Main {
 
     private static Employee findEmployeeWithMaxSalaryInDepartment(int departmentId) {
         Employee employeeWithMaxSalary = null;
-        for (Employee employee : employees) {
-            if (departmentId == employee.getDepartment()) {
-                if (employeeWithMaxSalary == null || employee.getSalary() > employeeWithMaxSalary.getSalary()) {
-                    employeeWithMaxSalary = employee;
-                }
+        for (Employee employee : employees)
+            if (departmentId == employee.getDepartment() && employeeWithMaxSalary == null || employee.getSalary() > employeeWithMaxSalary.getSalary()) {
+                employeeWithMaxSalary = employee;
             }
-        }
         return employeeWithMaxSalary;
     }
 
@@ -162,7 +158,8 @@ public class Main {
         }
     }
 
-    private static void printAllEmployeeInDepartment(int departmentId) {
+
+    private static void printAllEmployeeInDepartment ( int departmentId){
         for (Employee employee : employees) {
             if (departmentId == employee.getDepartment()) {
                 System.out.println(employee.getId() + ". ФИО: " + employee.getFullName() + ", зарплата: " + employee.getSalary() + " руб.коп.");
@@ -170,7 +167,7 @@ public class Main {
         }
     }
 
-    private static void findAndPrintAllEmployeesWithSalaryBelowTheNumber(double number) {
+    private static void findAndPrintAllEmployeesWithSalaryBelowTheNumber ( double number){
         for (Employee employee : employees) {
             if (employee.getSalary() < number) {
                 System.out.println(employee.getId() + ". ФИО: " + employee.getFullName() + ", зарплата: " + employee.getSalary() + " руб.коп.");
