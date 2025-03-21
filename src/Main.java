@@ -1,187 +1,90 @@
 public class Main {
-    private static Employee[] employees = new Employee[10];
 
 
     public static void main(String[] args) {
-        employees[0] = new Employee("Иванов Иван Иванович", 1, 45_678.67);
-        employees[1] = new Employee("Петров Петр Петрович", 3, 34_348.98);
-        employees[2] = new Employee("Сидоров Олег Олегович", 2, 57_567.64);
-        employees[3] = new Employee("Сергеев Сергей Сергеевич", 4, 67_321.67);
-        employees[4] = new Employee("Бедный Артем Степанович", 2, 54_342.87);
-        employees[5] = new Employee("Хитрая Татьяна Владимировна", 5, 87_989.63);
-        employees[6] = new Employee("Лидер Степан Александрович", 5, 97_567.34);
-        employees[7] = new Employee("Работяга Илья Иванович", 1, 42_897.28);
-        employees[8] = new Employee("Труд Ольга Викторовна", 1, 42_666.21);
-        employees[9] = new Employee("Зам Карина Алексеевна", 5, 94_632.65);
+        EmployeeBook employeeBook = new EmployeeBook(10);
 
-        printAllEmployee();
+        boolean added1 = employeeBook.addEmployee(new Employee("Иванов Иван Иванович", 1, 45_678.67));
+        boolean added2 = employeeBook.addEmployee(new Employee("Свободный Сергей Иванович", 2, 25_679.23));
+        boolean added3 = employeeBook.addEmployee(new Employee("Петров Петр Петрович", 3, 34_348.98));
+        boolean added4 = employeeBook.addEmployee(new Employee("Сергеев Сергей Сергеевич", 2, 67_321.67));
+        boolean added5 = employeeBook.addEmployee(new Employee("Бедный Артем Степанович", 4, 54_342.87));
+        boolean added6 = employeeBook.addEmployee(new Employee("Хитрая Татьяна Владимировна", 5, 87_989.63));
+        boolean added7 = employeeBook.addEmployee(new Employee("Лидер Степан Александрович", 5, 97_567.34));
+        boolean added8 = employeeBook.addEmployee(new Employee("Работяга Илья Иванович", 1, 42_897.28));
+        boolean added9 = employeeBook.addEmployee(new Employee("Труд Ольга Викторовна", 1, 42_666.21));
+        boolean added10 = employeeBook.addEmployee(new Employee("Зам Карина Алексеевна", 5, 94_632.65));
+        boolean added11 = employeeBook.addEmployee(new Employee("Лишний Андрей Владимрович", 5, 56_678.84));
+        System.out.println("Добавить нового сотрудника, результат: " + added1);
+        System.out.println("Добавить нового сотрудника, результат: " + added2);
+        System.out.println("Добавить нового сотрудника, результат: " + added3);
+        System.out.println("Добавить нового сотрудника, результат: " + added4);
+        System.out.println("Добавить нового сотрудника, результат: " + added5);
+        System.out.println("Добавить нового сотрудника, результат: " + added6);
+        System.out.println("Добавить нового сотрудника, результат: " + added7);
+        System.out.println("Добавить нового сотрудника, результат: " + added8);
+        System.out.println("Добавить нового сотрудника, результат: " + added9);
+        System.out.println("Добавить нового сотрудника, результат: " + added10);
+        System.out.println("Добавить нового сотрудника, результат: " + added11);
+        System.out.println("Список сотрудников: ");
+        employeeBook.printAllEmployee();
         System.out.println();
-        double sum = calculateTotalSumSalary();
+        int employeeId = 2;
+        employeeBook.removeEmployee(employeeId);
+        System.out.println("Удаляем сотрудника с номером " + employeeId);
+        System.out.println();
+        System.out.println("Список сотрудников: ");
+        employeeBook.printAllEmployee();
+        System.out.println();
+        int id = 8;
+        System.out.println("Сотрудник с номером: " + employeeBook.getEmployeeById(id));
+        System.out.println();
+        double sum = employeeBook.calculateTotalSumSalary();
         System.out.println("Сумма затрат на ЗП в месяц: " + sum + " руб.коп.");
         System.out.println();
-        Employee employeeWithMinSalary = findEmployeeWithMinSalary();
+        Employee employeeWithMinSalary = employeeBook.findEmployeeWithMinSalary();
         System.out.println("Сотрудник с минимальной зарплатой в размере " + employeeWithMinSalary.getSalary() + " руб.коп. - " + employeeWithMinSalary.getFullName());
         System.out.println();
-        Employee employeeWithMaxSalary = findEmployeeWithMaxSalary();
+        Employee employeeWithMaxSalary = employeeBook.findEmployeeWithMaxSalary();
         System.out.println("Сотрудник с максимальной зарплатой в размере " + employeeWithMaxSalary.getSalary() + " руб.коп. - " + employeeWithMaxSalary.getFullName());
         System.out.println();
-        double averageSalary = calculateAverageSalary();
+        double averageSalary = employeeBook.calculateAverageSalary();
         System.out.println("Средняя зарплата сотрудников состовляет: " + averageSalary + " руб.коп.");
         System.out.println();
-        printFullNameEmployee();
+        System.out.println("ФИО сотрудников:");
+        employeeBook.printFullNameEmployee();
         System.out.println();
         double percent = 10.2;
-        indexSalaryEmployee(percent);
-        printAllEmployee();
+        System.out.println("Список сотрудников после индексации ЗП на " + percent + "%: ");
+        employeeBook.indexSalaryEmployee(percent);
+        employeeBook.printAllEmployee();
         System.out.println();
         int departmentId = 1;
-        Employee employeeWithMinSalaryInDepartment = findEmployeeWithMinSalaryInDepartment(departmentId);
+        Employee employeeWithMinSalaryInDepartment = employeeBook.findEmployeeWithMinSalaryInDepartment(departmentId);
         System.out.println("Сотрудник с минимальной зарплатой в отделе " + employeeWithMinSalaryInDepartment.getDepartment() + " в размере " + employeeWithMinSalaryInDepartment.getSalary() + " руб.коп. - " + employeeWithMinSalaryInDepartment.getFullName());
         System.out.println();
-        Employee employeeWithMaxSalaryInDepartment = findEmployeeWithMaxSalaryInDepartment(departmentId);
+        Employee employeeWithMaxSalaryInDepartment = employeeBook.findEmployeeWithMaxSalaryInDepartment(departmentId);
         System.out.println("Сотрудник с максимальной зарплатой в отделе " + employeeWithMaxSalaryInDepartment.getDepartment() + " в размере " + employeeWithMaxSalaryInDepartment.getSalary() + " руб.коп. - " + employeeWithMaxSalaryInDepartment.getFullName());
         System.out.println();
-        double sumInDepartment = calculateTotalSumSalaryInDepartment(departmentId);
+        double sumInDepartment = employeeBook.calculateTotalSumSalaryInDepartment(departmentId);
         System.out.println("Сумма затрат на ЗП по отделу " + departmentId + " в месяц: " + sumInDepartment + " руб.коп.");
         System.out.println();
-        double averageSalaryInDepartment = calculateAverageSalaryInDepartment(departmentId);
+        double averageSalaryInDepartment = employeeBook.calculateAverageSalaryInDepartment(departmentId);
         System.out.println("Средняя зарплата сотрудников в отделе " + departmentId + " состовляет: " + averageSalaryInDepartment + " руб.коп.");
         System.out.println();
         double percentInDepartment = 9.5;
-        indexSalaryEmployeeInDepartment(departmentId, percentInDepartment);
-        printAllEmployeeInDepartment(departmentId);
+        System.out.println("Список сотрудников " + departmentId + " отдела после индексации ЗП на " + percentInDepartment + "%: ");
+        employeeBook.indexSalaryEmployeeInDepartment(departmentId, percentInDepartment);
+        employeeBook.printAllEmployeeInDepartment(departmentId);
         System.out.println();
-        double number = 60_000.0;
-        findAndPrintAllEmployeesWithSalaryBelowTheNumber(number);
+        double number = 60_000.00;
+        System.out.println("Список сотрудников c ЗП меньше " + number + " руб.коп:");
+        employeeBook.findAndPrintAllEmployeesWithSalaryBelowTheNumber(number);
         System.out.println();
-        findAndPrintAllEmployeesWithSalaryAboveTheNumber(number);
-    }
-
-    private static void printAllEmployee() {
-        for (Employee employee : employees) {
-            System.out.println(employee);
-        }
-    }
-
-    private static double calculateTotalSumSalary() {
-        double sum = 0.0;
-        for (Employee employee : employees) {
-            sum += employee.getSalary();
-        }
-        return sum;
-    }
-
-    private static Employee findEmployeeWithMinSalary() {
-        Employee employeeWithMinSalary = null;
-        for (Employee employee : employees) {
-            if (employeeWithMinSalary == null || employee.getSalary() < employeeWithMinSalary.getSalary()) {
-                employeeWithMinSalary = employee;
-            }
-        }
-        return employeeWithMinSalary;
-    }
-
-    private static Employee findEmployeeWithMaxSalary() {
-        Employee employeeWithMaxSalary = null;
-        for (Employee employee : employees) {
-            if (employeeWithMaxSalary == null || employee.getSalary() > employeeWithMaxSalary.getSalary()) {
-                employeeWithMaxSalary = employee;
-            }
-        }
-        return employeeWithMaxSalary;
-    }
-
-    private static double calculateAverageSalary() {
-        return Math.round((calculateTotalSumSalary() / employees.length) * 100.0) / 100.0;
-    }
-
-    private static void printFullNameEmployee() {
-        for (Employee employee : employees) {
-            System.out.println(employee.getFullName());
-        }
-    }
-
-    private static void indexSalaryEmployee(double percent) {
-        double indexSalary;
-        for (Employee employee : employees) {
-            indexSalary = employee.getSalary() + employee.getSalary() * percent / 100;
-            employee.setSalary(Math.round(indexSalary * 100.0) / 100.0);
-        }
-    }
-
-    private static Employee findEmployeeWithMinSalaryInDepartment(int departmentId) {
-        Employee employeeWithMinSalary = null;
-        for (Employee employee : employees) {
-            if (departmentId == employee.getDepartment() && (employeeWithMinSalary == null || employee.getSalary() < employeeWithMinSalary.getSalary())) {
-                employeeWithMinSalary = employee;
-            }
-        }
-        return employeeWithMinSalary;
-    }
-
-    private static Employee findEmployeeWithMaxSalaryInDepartment(int departmentId) {
-        Employee employeeWithMaxSalary = null;
-        for (Employee employee : employees)
-            if (departmentId == employee.getDepartment() && employeeWithMaxSalary == null || employee.getSalary() > employeeWithMaxSalary.getSalary()) {
-                employeeWithMaxSalary = employee;
-            }
-        return employeeWithMaxSalary;
-    }
-
-    private static double calculateTotalSumSalaryInDepartment(int departmentId) {
-        double sumInDepartment = 0.0;
-        for (Employee employee : employees) {
-            if (departmentId == employee.getDepartment()) {
-                sumInDepartment += employee.getSalary();
-            }
-        }
-        return sumInDepartment;
-    }
-
-    private static double calculateAverageSalaryInDepartment(int departmentId) {
-        int employeesInDepartment = 0;
-        for (Employee employee : employees) {
-            if (departmentId == employee.getDepartment()) {
-                employeesInDepartment++;
-            }
-        }
-        return Math.round((calculateTotalSumSalaryInDepartment(departmentId) / employeesInDepartment) * 100.0) / 100.0;
-    }
-
-    private static void indexSalaryEmployeeInDepartment(int departmentId, double percentInDepartment) {
-        double indexSalaryInDepartment;
-        for (Employee employee : employees) {
-            if (departmentId == employee.getDepartment()) {
-                indexSalaryInDepartment = employee.getSalary() + employee.getSalary() * percentInDepartment / 100;
-                employee.setSalary(Math.round(indexSalaryInDepartment * 100.0) / 100.0);
-            }
-        }
+        System.out.println("Список сотрудников c ЗП больше или равно " + number + " руб.коп:");
+        employeeBook.findAndPrintAllEmployeesWithSalaryAboveTheNumber(number);
     }
 
 
-    private static void printAllEmployeeInDepartment ( int departmentId){
-        for (Employee employee : employees) {
-            if (departmentId == employee.getDepartment()) {
-                System.out.println(employee.getId() + ". ФИО: " + employee.getFullName() + ", зарплата: " + employee.getSalary() + " руб.коп.");
-            }
-        }
-    }
 
-    private static void findAndPrintAllEmployeesWithSalaryBelowTheNumber ( double number){
-        for (Employee employee : employees) {
-            if (employee.getSalary() < number) {
-                System.out.println(employee.getId() + ". ФИО: " + employee.getFullName() + ", зарплата: " + employee.getSalary() + " руб.коп.");
-            }
-        }
-
-    }
-
-    private static void findAndPrintAllEmployeesWithSalaryAboveTheNumber(double number) {
-        for (Employee employee : employees) {
-            if (employee.getSalary() >= number) {
-                System.out.println(employee.getId() + ". ФИО: " + employee.getFullName() + ", зарплата: " + employee.getSalary() + " руб.коп.");
-            }
-        }
-
-    }
 }
