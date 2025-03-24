@@ -2,7 +2,7 @@ public class Main {
 
 
     public static void main(String[] args) {
-        EmployeeBook employeeBook = new EmployeeBook(10);
+        EmployeeBook employeeBook = new EmployeeBook();
 
         boolean added1 = employeeBook.addEmployee(new Employee("Иванов Иван Иванович", 1, 45_678.67));
         boolean added2 = employeeBook.addEmployee(new Employee("Свободный Сергей Иванович", 2, 25_679.23));

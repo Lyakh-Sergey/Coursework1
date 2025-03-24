@@ -1,11 +1,9 @@
 public class EmployeeBook {
     private final Employee[] employees;
-    private int capacity;
 
 
-    public EmployeeBook(int capacity) {
-        this.capacity = capacity;
-        employees = new Employee[capacity];
+    public EmployeeBook() {
+        this.employees = new Employee[10];
     }
 
     public boolean addEmployee(Employee employee) {
@@ -21,8 +19,9 @@ public class EmployeeBook {
 
     public void removeEmployee(int employeeId) {
         for (int i = 0; i < employees.length; i++) {
-            if (employees[i].getId() == employeeId) {
+            if (employees[i] != null && employees[i].getId() == employeeId) {
                 employees[i] = null;
+                break;
             }
         }
     }
@@ -37,7 +36,9 @@ public class EmployeeBook {
     }
 
     public void printAllEmployee() {
-        for (Employee employee : employees) System.out.println(employee);
+        for (Employee employee : employees) {
+            System.out.println(employee);
+        }
     }
 
     public double calculateTotalSumSalary() {
@@ -104,10 +105,11 @@ public class EmployeeBook {
 
     public Employee findEmployeeWithMaxSalaryInDepartment(int departmentId) {
         Employee employeeWithMaxSalary = null;
-        for (Employee employee : employees)
+        for (Employee employee : employees) {
             if (employee != null && (departmentId == employee.getDepartment() && (employeeWithMaxSalary == null || employee.getSalary() > employeeWithMaxSalary.getSalary()))) {
                 employeeWithMaxSalary = employee;
             }
+        }
         return employeeWithMaxSalary;
     }
 
